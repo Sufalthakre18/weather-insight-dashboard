@@ -6,7 +6,7 @@ import HistoricalCharts from '../components/HistoricalCharts';
 import LoadingSpinner from '../components/LoadingSpinner';
 import ErrorToast from '../components/ErrorToast';
 
-const MAX_DAYS = 730; 
+const MAX_DAYS = 730; // 2 years
 
 export default function Page2({ location }) {
   const today = new Date();
@@ -151,7 +151,7 @@ export default function Page2({ location }) {
                   setEndDate(end);
                 }}
                 className="text-xs px-3 py-1 rounded-full transition-all hover:scale-105"
-                style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', color: '#546e7a', fontFamily: "'Exo 2',sans-serif" }}
+                style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', color: '#D6ECFF', fontFamily: "'Exo 2',sans-serif" }}
               >
                 {d}d
               </button>

@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react';
 
-export default function ZoomableChart({ title, children, dataLength, baseWidthPer = 32, minWidth = 500, height = 260, accent = '#00e5ff' }) {
+export default function ZoomableChart({ title, children, dataLength, baseWidthPer = 32, minWidth = 500, height = 260, accent = '#d4a843' }) {
   const [zoom, setZoom] = useState(1);
   const wrapperRef = useRef(null);
   const chartWidth = Math.max(minWidth, dataLength * baseWidthPer * zoom);
@@ -24,13 +24,13 @@ export default function ZoomableChart({ title, children, dataLength, baseWidthPe
           <button
             onClick={handleZoomOut}
             className="w-7 h-7 flex items-center justify-center rounded text-xs font-bold transition-all hover:scale-110"
-            style={{ background: 'rgba(0,229,255,0.08)', border: '1px solid rgba(0,229,255,0.15)', color: '#00e5ff' }}
+            style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: '#e8c97a' }}
             title="Zoom out"
           >−</button>
           <button
             onClick={handleReset}
             className="px-2 h-7 flex items-center justify-center rounded text-xs transition-all hover:scale-110"
-            style={{ background: 'rgba(0,229,255,0.08)', border: '1px solid rgba(0,229,255,0.15)', color: '#546e7a' }}
+            style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', color: 'rgba(255,255,255,0.35)' }}
             title="Reset zoom"
           >
             {Math.round(zoom * 100)}%
@@ -38,7 +38,7 @@ export default function ZoomableChart({ title, children, dataLength, baseWidthPe
           <button
             onClick={handleZoomIn}
             className="w-7 h-7 flex items-center justify-center rounded text-xs font-bold transition-all hover:scale-110"
-            style={{ background: 'rgba(0,229,255,0.08)', border: '1px solid rgba(0,229,255,0.15)', color: '#00e5ff' }}
+            style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', color: '#e8c97a' }}
             title="Zoom in"
           >+</button>
         </div>

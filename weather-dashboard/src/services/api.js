@@ -40,11 +40,11 @@ export async function fetchDayWeather(lat, lon, date) {
     ].join(',');
   }
 
-  const response = await axios.get(baseUrl, { params, timeout: 3000 });
+  const response = await axios.get(baseUrl, { params, timeout: 5000 });
   return { data: response.data, usedForecast: useForecast };
 }
 
-/* ── Page 1: Air quality for a single date ── */
+/* page 1 Air quality for a single date */
 export async function fetchDayAirQuality(lat, lon, date) {
   const dateStr = format(date, 'yyyy-MM-dd');
   const useForecast = isTodayOrFuture(date);
@@ -62,7 +62,7 @@ export async function fetchDayAirQuality(lat, lon, date) {
     params.current = ['pm10', 'pm2_5', 'carbon_monoxide', 'nitrogen_dioxide', 'sulphur_dioxide', 'european_aqi'].join(',');
   }
 
-  const response = await axios.get(AQ_URL, { params, timeout: 3000 });
+  const response = await axios.get(AQ_URL, { params, timeout: 5000 });
   return response.data;
 }
 
@@ -85,10 +85,10 @@ export async function fetchHistoricalWeather(lat, lon, startDate, endDate) {
   return response.data;
 }
 
-/* ── Page 2: Historical air quality (daily mean from hourly noon values) ── */
+/* Page 2 historical air quality */
 export async function fetchHistoricalAirQuality(lat, lon, startDate, endDate) {
-  // Fetch hourly data; we'll sample noon (12:00) values client-side for daily representation
-  const params = {
+  // Fetch hourly hourlyData
+    const params = {
     latitude: lat,
     longitude: lon,
     start_date: format(startDate, 'yyyy-MM-dd'),
