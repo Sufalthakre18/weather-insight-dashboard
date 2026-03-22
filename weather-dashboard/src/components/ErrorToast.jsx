@@ -18,10 +18,10 @@ export default function ErrorToast({ message, onDismiss }) {
       style={{ background: 'rgba(255,107,107,0.15)', border: '1px solid rgba(255,107,107,0.4)', backdropFilter: 'blur(12px)' }}
     >
       <span className="text-base shrink-0">⚠️</span>
-      <p className="text-sm text-[#ff6b6b]" style={{ fontFamily: "'Exo 2', sans-serif" }}>{message}</p>
+      <p className="text-sm text-neon-coral" style={{ fontFamily: "'Exo 2', sans-serif" }}>{message}</p>
       <button
         onClick={() => { setVisible(false); onDismiss?.(); }}
-        className="ml-auto text-[#ff6b6b] hover:text-white text-lg leading-none shrink-0"
+        className="ml-auto text-neon-coral hover:text-white text-lg leading-none shrink-0"
       >
         ×
       </button>

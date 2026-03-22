@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 import {
   LineChart, Line, BarChart, Bar, ComposedChart, Area,
-  XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ReferenceLine
+  XAxis, YAxis, CartesianGrid, Tooltip, Legend,
 } from 'recharts';
 import ZoomableChart from './ZoomableChart';
 

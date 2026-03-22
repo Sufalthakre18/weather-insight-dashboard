@@ -10,7 +10,7 @@ function isTodayOrFuture(date) {
   return isToday(d) || isFuture(d);
 }
 
-/* Page 1 single-date weather hourly */
+/* ── Page 1: Single-date weather + hourly ── */
 export async function fetchDayWeather(lat, lon, date) {
   const dateStr = format(date, 'yyyy-MM-dd');
   const useForecast = isTodayOrFuture(date);
@@ -44,7 +44,7 @@ export async function fetchDayWeather(lat, lon, date) {
   return { data: response.data, usedForecast: useForecast };
 }
 
-/*  Air quality for a single date  */
+/* ── Page 1: Air quality for a single date ── */
 export async function fetchDayAirQuality(lat, lon, date) {
   const dateStr = format(date, 'yyyy-MM-dd');
   const useForecast = isTodayOrFuture(date);
@@ -66,7 +66,7 @@ export async function fetchDayAirQuality(lat, lon, date) {
   return response.data;
 }
 
-/*  Page 2  historical daily weather  */
+/* ── Page 2: Historical daily weather ── */
 export async function fetchHistoricalWeather(lat, lon, startDate, endDate) {
   const params = {
     latitude: lat,
@@ -85,10 +85,10 @@ export async function fetchHistoricalWeather(lat, lon, startDate, endDate) {
   return response.data;
 }
 
-/*  Historical air quality */
+/* ── Page 2: Historical air quality (daily mean from hourly noon values) ── */
 export async function fetchHistoricalAirQuality(lat, lon, startDate, endDate) {
-  
-    const params = {
+  // Fetch hourly data; we'll sample noon (12:00) values client-side for daily representation
+  const params = {
     latitude: lat,
     longitude: lon,
     start_date: format(startDate, 'yyyy-MM-dd'),
@@ -101,6 +101,7 @@ export async function fetchHistoricalAirQuality(lat, lon, startDate, endDate) {
   return response.data;
 }
 
+/* ── Helpers ── */
 export function getWeatherMeta(code) {
   const c = Number(code);
   if (c === 0)                          return { label: 'Clear Sky',         icon: '☀️',  bg: 'sunny' };
@@ -122,7 +123,7 @@ export function getAqiMeta(aqi) {
   return { label: 'Unhealthy', cls: 'aqi-unhealthy' };
 }
 
-/* extract hourly data for a specific date from full hourly arrays */
+/* Extract hourly data for a specific date from full hourly arrays */
 export function extractDayHourly(hourlyData, dateStr) {
   const indices = hourlyData.time
     .map((t, i) => (t.startsWith(dateStr) ? i : -1))
@@ -139,17 +140,21 @@ export function extractDayHourly(hourlyData, dateStr) {
   return result;
 }
 
-/* sample hourly → daily  */
+/* Sample hourly → daily (take noon = index 12 of each day block of 24) */
 export function hourlyToDaily(hourlyAQ) {
-  const times = hourlyAQ.time;
-  const pm10  = hourlyAQ.pm10;
-  const pm25  = hourlyAQ.pm2_5;
+  // API returns { hourly: { time, pm10, pm2_5 } } — unwrap if needed
+  const hourly = hourlyAQ?.hourly ?? hourlyAQ;
+  const times  = hourly?.time;
+  const pm10   = hourly?.pm10;
+  const pm25   = hourly?.pm2_5;
+
+  if (!times?.length) return { dates: [], pm10: [], pm25: [] };
 
   const daily = { dates: [], pm10: [], pm25: [] };
   for (let i = 12; i < times.length; i += 24) {
-    daily.dates.push(times[i].substring(0, 10));
-    daily.pm10.push(pm10[i] ?? null);
-    daily.pm25.push(pm25[i] ?? null);
+    daily.dates.push(times[i].slice(0, 10));
+    daily.pm10.push(pm10?.[i] ?? null);
+    daily.pm25.push(pm25?.[i] ?? null);
   }
   return daily;
 }

@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import {
   LineChart, Line, BarChart, Bar, ComposedChart, Area,
-  XAxis, YAxis, CartesianGrid, Tooltip, Legend, ScatterChart, Scatter,
+  XAxis, YAxis, CartesianGrid, Tooltip, Legend,
 } from 'recharts';
 import ZoomableChart from './ZoomableChart';
 import { fmtDateLabel, windDirLabel } from '../utils/helpers';
@@ -58,7 +58,9 @@ export default function HistoricalCharts({ weather, airQuality }) {
           const hrs = dt.toLocaleString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'Asia/Kolkata' });
           const [h, m] = hrs.split(':').map(Number);
           return +(h + m / 60).toFixed(2);
-        } catch { return null; }
+        } catch {
+           return null; 
+        }
       };
       return { date: d, label: fmtDateLabel(d), sunrise: toIST(riseStr), sunset: toIST(setStr) };
     });
@@ -99,7 +101,7 @@ export default function HistoricalCharts({ weather, airQuality }) {
   return (
     <div className="flex flex-col gap-5">
 
-      {/* Temperature: Mean / Max / Min */}
+      {/* temperature Mean Max Min */}
       <ZoomableChart title="Temperature — Mean / Max / Min" dataLength={len} baseWidthPer={28} accent="#00e5ff">
         {(w, h) => (
           <ComposedChart width={w} height={h} data={tempData} {...chartProps}>

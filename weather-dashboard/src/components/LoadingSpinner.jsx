@@ -12,7 +12,7 @@ export default function LoadingSpinner({ message = 'Fetching data...' }) {
         />
         <div className="absolute inset-0 flex items-center justify-center text-lg">🌡️</div>
       </div>
-      <p className="text-[#546e7a] text-sm tracking-widest uppercase animate-pulse" style={{ fontFamily: "'Exo 2', sans-serif" }}>
+      <p className="text-text-muted text-sm tracking-widest uppercase animate-pulse" style={{ fontFamily: "'Exo 2', sans-serif" }}>
         {message}
       </p>
     </div>

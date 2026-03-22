@@ -16,7 +16,7 @@ export default function Header({ locationName = '' }) {
           >
             AtmoSphere
           </h1>
-          <p className="text-xs text-[#546e7a] tracking-wide" style={{ fontFamily: "'Exo 2', sans-serif" }}>
+          <p className="text-xs text-text-muted tracking-wide" style={{ fontFamily: "'Exo 2', sans-serif" }}>
             Weather Intelligence
           </p>
         </div>
@@ -27,7 +27,7 @@ export default function Header({ locationName = '' }) {
         <Link
           to="/"
           className={`px-3 sm:px-4 py-2 text-xs sm:text-sm font-semibold tracking-wider uppercase transition-all rounded-t-lg
-            ${pathname === '/' ? 'nav-active text-[#00e5ff]' : 'text-[#546e7a] hover:text-[#e8f4f8]'}`}
+            ${pathname === '/' ? 'nav-active text-neon-cyan' : 'text-text-muted hover:text-text-primary'}`}
           style={{ fontFamily: "'Exo 2', sans-serif" }}
         >
           Daily
@@ -35,7 +35,7 @@ export default function Header({ locationName = '' }) {
         <Link
           to="/historical"
           className={`px-3 sm:px-4 py-2 text-xs sm:text-sm font-semibold tracking-wider uppercase transition-all rounded-t-lg
-            ${pathname === '/historical' ? 'nav-active text-[#00e5ff]' : 'text-[#546e7a] hover:text-[#e8f4f8]'}`}
+            ${pathname === '/historical' ? 'nav-active text-neon-cyan' : 'text-text-muted hover:text-text-primary'}`}
           style={{ fontFamily: "'Exo 2', sans-serif" }}
         >
           Historical
@@ -45,12 +45,12 @@ export default function Header({ locationName = '' }) {
       {/* Location + time */}
       <div className="flex items-center gap-3 text-right">
         {locationName && (
-          <span className="flex items-center gap-1 text-xs sm:text-sm text-[#00e5ff]" style={{ fontFamily: "'Exo 2', sans-serif" }}>
+          <span className="flex items-center gap-1 text-xs sm:text-sm text-neon-cyan" style={{ fontFamily: "'Exo 2', sans-serif" }}>
             <span>📍</span>
             <span className="max-w-35 truncate">{locationName}</span>
           </span>
         )}
-        <span className="text-xs text-[#546e7a]" style={{ fontFamily: "'DM Mono', monospace" }}>
+        <span className="text-xs text-text-muted" style={{ fontFamily: "'DM Mono', monospace" }}>
           {format(new Date(), 'dd MMM HH:mm')}
         </span>
       </div>
