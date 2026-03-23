@@ -152,5 +152,4 @@ weather-insight-dashboard/
 **Sufal Thakre**
 GitHub: [@Sufalthakre18](https://github.com/Sufalthakre18)
 
----
 
